@@ -18,6 +18,8 @@ namespace ContosoPizza.Pages
         {
             PizzaList = _service.GetPizzas();
         }
+
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid || NewPizza == null)
@@ -26,6 +28,13 @@ namespace ContosoPizza.Pages
             }
 
             _service.AddPizza(NewPizza);
+
+            return RedirectToAction("Get");
+        }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            _service.DeletePizza(id);
 
             return RedirectToAction("Get");
         }
